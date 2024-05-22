@@ -1,0 +1,8 @@
+board:
+  name: bmd100
+  vendor: bitmask
+  socs:
+  - name: 'nrf5340'
+    variants:
+    - name: 'ns'
+      cpucluster: 'cpuapp'
