@@ -71,6 +71,13 @@ config HEAP_MEM_POOL_ADD_SIZE_BOARD
 	int
 	default 4096 if BT_HCI_IPC
 
+# By default, a USB CDC ACM instance is already enabled in the board's DTS.
+# It is not necessary for nRF Connect SDK to add another instance if MCUBoot
+# bootloader is built as a child image.
+config MCUBOOT_USB_SUPPORT
+	bool
+	default n
+
 endif #  BOARD_BMD100_NRF5340_CPUAPP || BOARD_BMD100_NRF5340_CPUAPP_NS
 
 if BOARD_BMD100_NRF5340_CPUNET
