@@ -75,14 +75,9 @@
 	};
 };
 
-/**
- * NOTE: Uncomment this when building projects with Zephyr to enable FEM.
- * 		 When building with nRF Connect SDK, this should be commented as the
- * 	     the MPSL component manages the FEM.
- */
-// &radio {
-// 	fem = <&nrf_radio_fem>;
-// };
+&radio {
+	fem = <&nrf_radio_fem>;
+};
 
 &gpiote {
 	status = "okay";
