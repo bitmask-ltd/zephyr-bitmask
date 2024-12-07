@@ -58,6 +58,6 @@ Follow instructions in the sample URL for more information.
 
 The nRF5340 has an internal DCDC converter, however, it is not used on the BMD100. Instead, the BMD100 uses an LDO to power both the nRF5340 and the nRF21540. This design decision means the nRF5340 does not possess the necessary passive components required for DCDC configuration.
 
-Unfortunately, mistakenly enabling the nRF5340's DCDC converter is an easy way to soft-brick the device. See more: [Unbricking a nRF53 due to DCDC config](https://blog.mbedded.ninja/programming/microcontrollers/nordic/nrf53/unbricking-a-nrf53-due-to-dcdc-config/)
+Unfortunately, mistakenly enabling the DCDC converter is an easy way to soft-brick the device. See more: [Unbricking a nRF53 due to DCDC config](https://blog.mbedded.ninja/programming/microcontrollers/nordic/nrf53/unbricking-a-nrf53-due-to-dcdc-config/)
 
-The `bmd100` board correctly disables the DCDC converter. However, care must be taken to disable the DCDC converter when building applications for other board targets (such as the nRF5340-DK) which enable the DCDC converter by default. 
+The `bmd100` board correctly disables the DCDC converter. However, care must be taken to also disable it when building applications for other board targets (such as the nRF5340-DK), which enable it by default.
