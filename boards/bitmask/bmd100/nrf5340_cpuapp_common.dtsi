@@ -25,14 +25,14 @@
 	*/
 	gpio_fwd: nrf-gpio-forwarder {
 		compatible = "nordic,nrf-gpio-forwarder";
-		nrf21540-gpio-if {
+		status = "okay";
+		fem-gpio-if {
 			gpios =	<&gpio0 30 0>, /* tx-en-gpios */
 					<&gpio0 31 0>, /* rx-en-gpios */
 					<&gpio1 10 0>, /* pdn-gpios */
 					<&gpio1 13 0>; /* mode-gpios */
 		};
-	
-		nrf21540-spi-if {
+		spi_fwd {
 			gpios = <&gpio1 8 0>,	/* cs-gpios */
 					<&gpio0 29 0>,	/* SPIM_SCK */
 					<&gpio0 24 0>,	/* SPIM_MISO */
@@ -40,18 +40,6 @@
 		};
 	};
 };
-
-// &vregmain {
-// 	regulator-initial-mode = <NRF5X_REG_MODE_DCDC>;
-// };
-
-// &vregradio {
-// 	regulator-initial-mode = <NRF5X_REG_MODE_DCDC>;
-// };
-
-// &vregh {
-// 	status = "okay";
-// };
 
 &gpiote {
 	status = "okay";
