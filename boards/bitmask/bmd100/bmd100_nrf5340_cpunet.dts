@@ -26,7 +26,7 @@
 	/**
 	* https://developer.nordicsemi.com/nRF_Connect_SDK/doc/2.1.0-rc2/zephyr/build/dts/api/bindings/gpio/nordic%2Cnrf-gpio-forwarder.html
 	*/
-	nrf_radio_fem: nrf21540 {
+	nrf_radio_fem: fem {
 		compatible = "nordic,nrf21540-fem";
 		status = "okay";
 		tx-en-gpios = <&gpio0 30 GPIO_ACTIVE_HIGH>;
@@ -42,10 +42,6 @@
 	aliases {
 		watchdog0 = &wdt0;
 	};
-};
-
-&radio {
-	fem = <&nrf_radio_fem>;
 };
 
 &gpiote {
@@ -74,6 +70,10 @@ fem_spi: &spi0 {
 		reg = <0>;
 		spi-max-frequency = <8000000>;
 	};
+};
+
+&radio {
+	fem = <&nrf_radio_fem>;
 };
 
 &flash1 {
