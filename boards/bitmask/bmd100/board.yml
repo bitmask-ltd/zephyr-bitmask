@@ -1,5 +1,6 @@
 board:
   name: bmd100
+  full_name: BMD100
   vendor: bitmask
   socs:
   - name: 'nrf5340'
