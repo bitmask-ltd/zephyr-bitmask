@@ -9,12 +9,5 @@ CONFIG_HW_STACK_PROTECTION=y
 # Enable GPIO
 CONFIG_GPIO=y
 
-# # Enable uart driver
-# CONFIG_SERIAL=y
-
-# # enable console
-# CONFIG_CONSOLE=y
-# CONFIG_UART_CONSOLE=y
-
-# # Enable SPI for nRF21540 FEM control
-# CONFIG_SPI=y
+# Enable SPI for nRF21540 FEM control
+CONFIG_SPI=y
