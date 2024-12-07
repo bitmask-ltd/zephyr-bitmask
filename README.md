@@ -10,7 +10,7 @@ manifest:
   remotes:
     # ...
     - name: bitmask
-      url-base: git@github.com:bitmask-ltd
+      url-base: https://github.com/bitmask-ltd
   projects:
     # ...
     - name: bitmask
@@ -25,6 +25,14 @@ After adding, run `west update` to import the module.
 ## BMD100
 
 The module contains the Zephyr board definition files for the BMD100 device. This board is available as a `bmd100` board target.
+
+The valid board targets for `bmd100` are:
+
+```
+bmd100/nrf5340/cpuapp
+bmd100/nrf5340/cpuapp/ns
+bmd100/nrf5340/cpunet
+```
 
 ### !! Do not enable the nRF5340's DCDC converter !!
 
