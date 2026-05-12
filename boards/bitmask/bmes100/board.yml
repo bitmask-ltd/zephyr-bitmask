@@ -1,0 +1,48 @@
+board:
+  name: bmes100
+  full_name: Bitmask BMES100
+  vendor: bitmask
+  socs:
+    - name: nrf54l15
+      variants:
+        - name: xip
+          cpucluster: cpuflpr
+        - name: ns
+          cpucluster: cpuapp
+runners:
+  run_once:
+    '--recover':
+      - runners:
+          - nrfjprog
+          - nrfutil
+        run: first
+        groups:
+          - boards:
+              - bmes100/nrf54l15/cpuapp
+              - bmes100/nrf54l15/cpuapp/ns
+              - bmes100/nrf54l15/cpuflpr
+              - bmes100/nrf54l15/cpuflpr/xip
+    '--erase':
+      - runners:
+          - nrfjprog
+          - jlink
+          - nrfutil
+        run: first
+        groups:
+          - boards:
+              - bmes100/nrf54l15/cpuapp
+              - bmes100/nrf54l15/cpuapp/ns
+              - bmes100/nrf54l15/cpuflpr
+              - bmes100/nrf54l15/cpuflpr/xip
+    '--reset':
+      - runners:
+          - nrfjprog
+          - jlink
+          - nrfutil
+        run: last
+        groups:
+          - boards:
+              - bmes100/nrf54l15/cpuapp
+              - bmes100/nrf54l15/cpuapp/ns
+              - bmes100/nrf54l15/cpuflpr
+              - bmes100/nrf54l15/cpuflpr/xip

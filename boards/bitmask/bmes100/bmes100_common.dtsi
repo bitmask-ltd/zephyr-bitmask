@@ -1,0 +1,100 @@
+/*
+ * Copyright (c) 2024 Nordic Semiconductor ASA
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#include <zephyr/dt-bindings/gpio/gpio.h>
+#include <zephyr/dt-bindings/regulator/npm2100.h>
+
+#include "bmes100_nrf54l15-pinctrl.dtsi"
+
+
+&i2c21 {
+	status = "okay";
+	pinctrl-0 = <&i2c21_default>;
+	pinctrl-1 = <&i2c21_sleep>;
+	pinctrl-names = "default", "sleep";
+	clock-frequency = <I2C_BITRATE_STANDARD>;
+};
+
+&uart20 {
+	status = "okay";
+	pinctrl-0 = <&uart20_default>;
+	pinctrl-1 = <&uart20_sleep>;
+	pinctrl-names = "default", "sleep";
+	current-speed = <115200>;
+};
+
+/ {
+	board_revision_vcc: board_revision_vcc {
+		gpios = <&gpio2 5 GPIO_ACTIVE_HIGH>;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+
+		led_green: led_green {
+			gpios = <&gpio2 2 GPIO_ACTIVE_LOW>;
+			label = "Green LED";
+		};
+		led_blue: led_blue {
+			gpios = <&gpio2 3 GPIO_ACTIVE_LOW>;
+			label = "Blue LED";
+		};
+		led_red: led_red {
+			gpios = <&gpio2 4 GPIO_ACTIVE_LOW>;
+			label = "Red LED";
+		};
+	};
+
+	aliases {
+		led0 = &led_green;
+		led1 = &led_red;
+		led2 = &led_blue;
+		pwm-led0 = &led_green;
+		// sw0 = &button0;
+	};
+};
+
+&i2c21 {
+	npm2100_pmic: pmic@74 {
+		compatible = "nordic,npm2100";
+		reg = <0x74>;
+		host-int-gpios = <&gpio1 5 GPIO_ACTIVE_HIGH>;
+		pmic-int-pin = <1>;
+
+		npm2100_regulators: regulators {
+			compatible = "nordic,npm2100-regulator";
+
+			npm2100_boost: BOOST {
+				regulator-min-microvolt = <1800000>;
+				regulator-max-microvolt = <3300000>;
+				regulator-init-microvolt = <3050000>;
+				regulator-always-on;
+				regulator-initial-mode = <NPM2100_REG_OPER_AUTO>;
+			};
+
+			npm2100_ldosw: LDOSW {
+				regulator-min-microvolt = <800000>;
+				regulator-max-microvolt = <3000000>;
+				regulator-init-microvolt = <2950000>;
+				regulator-initial-mode = <(NPM2100_REG_LDSW_EN | NPM2100_REG_OPER_AUTO)>;
+			};
+		};
+
+		npm2100_vbat: vbat {
+			compatible = "nordic,npm2100-vbat";
+		};
+	};
+
+	sht4x@44 {
+		status = "okay";
+		compatible = "sensirion,sht4x";
+		reg = <0x44>;
+		repeatability = <2>;
+	};
+};
+
+&uicr {
+	nfct-pins-as-gpios;
+};
