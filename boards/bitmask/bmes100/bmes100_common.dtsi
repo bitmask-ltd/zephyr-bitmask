@@ -30,6 +30,10 @@
 		gpios = <&gpio2 5 GPIO_ACTIVE_HIGH>;
 	};
 
+	board_revision: board_revision {
+		gpios = <&gpio1 6 GPIO_ACTIVE_HIGH>;
+	};
+
 	leds {
 		compatible = "gpio-leds";
 
@@ -60,8 +64,21 @@
 	npm2100_pmic: pmic@74 {
 		compatible = "nordic,npm2100";
 		reg = <0x74>;
-		host-int-gpios = <&gpio1 5 GPIO_ACTIVE_HIGH>;
+
 		pmic-int-pin = <1>;
+		pmic-int-flags = <GPIO_ACTIVE_HIGH>;
+		host-int-type = "level";
+		shiphold-longpress = "reset";
+
+		/* Board specific mapping */
+		host-int-gpios = <&gpio1 5 GPIO_ACTIVE_HIGH>;
+		
+		npm2100_gpio: gpio-controller {
+			compatible = "nordic,npm2100-gpio";
+			gpio-controller;
+			#gpio-cells = <2>;
+			ngpios = <2>;
+		};
 
 		npm2100_regulators: regulators {
 			compatible = "nordic,npm2100-regulator";
@@ -69,17 +86,20 @@
 			npm2100_boost: BOOST {
 				regulator-min-microvolt = <1800000>;
 				regulator-max-microvolt = <3300000>;
-				regulator-init-microvolt = <3050000>;
+				regulator-init-microamp = <0>;
+				// regulator-init-microvolt = <3050000>;
 				regulator-always-on;
-				regulator-initial-mode = <NPM2100_REG_OPER_AUTO>;
+				// regulator-initial-mode = <(NPM2100_REG_OPER_AUTO | NPM2100_REG_DPS_ALLOWLP)>;
 			};
 
 			npm2100_ldosw: LDOSW {
-				regulator-min-microvolt = <800000>;
-				regulator-max-microvolt = <3000000>;
-				regulator-init-microvolt = <2950000>;
-				regulator-initial-mode = <(NPM2100_REG_LDSW_EN | NPM2100_REG_OPER_AUTO)>;
+				status = "disabled";
 			};
+		};
+
+		npm2100ek_wdt: watchdog {
+			compatible = "nordic,npm2100-wdt";
+			status = "disabled";
 		};
 
 		npm2100_vbat: vbat {
