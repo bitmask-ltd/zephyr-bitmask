@@ -13,6 +13,7 @@
 		zephyr,code-partition = &slot0_ns_partition;
 		zephyr,sram = &sram0_ns;
 		zephyr,entropy = &psa_rng;
+		zephyr,settings-partition = &storage_partition;
 	};
 
 	/delete-node/ rng;
