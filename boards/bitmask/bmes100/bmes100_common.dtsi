@@ -68,7 +68,7 @@
 		pmic-int-pin = <1>;
 		pmic-int-flags = <GPIO_ACTIVE_HIGH>;
 		host-int-type = "level";
-		shiphold-longpress = "reset";
+		shiphold-longpress = "ship";
 
 		/* Board specific mapping */
 		host-int-gpios = <&gpio1 5 GPIO_ACTIVE_HIGH>;
