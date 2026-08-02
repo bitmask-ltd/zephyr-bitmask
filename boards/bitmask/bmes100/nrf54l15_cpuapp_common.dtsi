@@ -26,11 +26,20 @@
 	status = "okay";
 };
 
+/*
+ * The internal capacitor bank is programmed per crystal pin, so the value
+ * below is not the crystal's CL but CINT = 2 * CL - Cpcb, where Cpcb is the
+ * per-pin PCB stray capacitance (~1 pF for the short, symmetric traces on
+ * this board). See the nRF54L15 PS, "OSCILLATORS - Oscillator control".
+ */
+
+/* LFXO: 32.768 kHz crystal, CL = 7 pF -> 2 * 7 - 1 = 13 pF */
 &lfxo {
 	load-capacitors = "internal";
-	load-capacitance-femtofarad = <15000>;
+	load-capacitance-femtofarad = <13000>;
 };
 
+/* HFXO: 32 MHz crystal, CL = 8 pF -> 2 * 8 - 1 = 15 pF */
 &hfxo {
 	load-capacitors = "internal";
 	load-capacitance-femtofarad = <15000>;
