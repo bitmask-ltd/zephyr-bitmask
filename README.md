@@ -16,7 +16,7 @@ manifest:
   projects:
     # ...
     - name: bitmask
-      url: https://github.com/bitmask-ltd/bitmask-zephyr-module
+      url: https://github.com/BitmaskDesign/bitmask-zephyr-module
       path: modules/lib/bitmask
       revision: main
 ```
